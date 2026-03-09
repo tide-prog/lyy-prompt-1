@@ -1,0 +1,261 @@
+# 通过Gemini生成代码
+
+## 第一步：使用提示词
+
+需要对模块进行截图，上传到Gemini中，并加入以下提示词
+
+要求：
+导入全局通用css：https://hk-saas-cdn.lianyayun.com/static/jext/css/global.css?t=v2.1.20
+读取【https://hk-saas-cdn.lianyayun.com/static/jext/css/global.css?t=v2.1.20】，并结合使用。
+模块的内容宽度可用类名 cw1400。
+H5调整时，考虑不同宽度的自适应。
+在992px以下宽度开始调整，必须全部使用rem单位。
+移动端样式在768px以下宽度开始调整，必须全部使用rem单位。
+移动端名称或标题大小为0.32和0.36rem之间。
+移动端正文或描述大小为0.26和0.3rem之间。
+移动端最小字体为0.26rem。
+根据样式加入鼠标移入效果。
+如果模块有列表样式请使用 PHP 的 foreach 循环。
+hover样式写到@media(any-hover: hover){}中。
+用PHP生成模拟数据。
+交互功能也需要实现。
+
+限制：
+html标题不要用h标签,{}中的样式不要换行，单位用px，模块不要固定高度，用padding控制边距。
+No000是固定前缀，不可更换。
+除了No000Wrap类名，其他类名只保持一个单词或简写，不可多个单词拼接，且必须是id名+类名，例如：#No000Title .title{}。
+css的属性和值需要隔开一个空格，例如：#No000Title .title{font-size: *px;color: *;}。
+
+格式参考：
+```html
+<div class="No000Wrap">
+    <section id="No000Title" class="cw1440">
+        <h3 class="title">xxxx</h3>
+    </section>
+    <section id="No000Con" class="cw1440"></section>
+</div>
+<script></script>
+<style>
+/* 模块布局 */
+.No000Wrap{
+    --titleSize: 0.36rem;
+    --titleColor: #000;
+    --conSize: 0.3rem;
+    --conColor: #666;
+}
+
+/* 模块标题样式 */
+#No000Title{}
+#No000Title .title{}
+@media (max-width: 992px) {
+    #No000Title{}
+}
+@media (max-width: 768px) {
+    #No000Title{}
+}
+
+/* 模块内容样式 */
+#No000Con{}
+@media (max-width: 992px) {
+	#No000Con{}
+}
+@media (max-width: 768px) {
+    #No000Con{}
+}
+</style>
+```
+
+## 第二步：生成代码后，对代码检查
+因为是截图上传生成代码，所以对于一些细节可能需要手动调整，比如单位转换、样式优化等。
+也可以在提示词中告知内容宽度和标题大小等细节
+
+## 第三步：生成代码参考
+```html
+
+<?php
+// 模拟新闻数据
+$newsCards = [
+    [
+        'img' => 'https://via.placeholder.com/600x400/eeeeee/cccccc?text=News+Image',
+        'date' => '2025.10.28',
+        'cat' => '公司新闻',
+        'title' => '巨融医疗DSA介入手术终端正式入驻青岛市第三人民医院',
+        'desc' => '万物向新,蓄势而生。5月29日，深圳市巨融医疗科技有限公司苏州分公司正式落地...',
+        'active' => false
+    ],
+    [
+        'img' => 'https://via.placeholder.com/600x400/eeeeee/cccccc?text=News+Image',
+        'date' => '2025.10.28',
+        'cat' => '公司新闻',
+        'title' => '全国布局再落一子!巨融医疗苏州分公司正式落地',
+        'desc' => '万物向新,蓄势而生。5月29日，深圳市巨融医疗科技有限公司苏州分公司正式落地...',
+        'active' => true
+    ]
+];
+
+$newsList = [
+    [
+        'date' => '2025.10.28',
+        'cat' => '公司新闻',
+        'title' => '巨融医疗产品亮相2021深圳市医学会年乳腺学组学术年会',
+        'active' => true
+    ],
+    [
+        'date' => '2025.10.28',
+        'cat' => '公司新闻',
+        'title' => '巨融医疗助力内蒙古自治区巴彦淖尔市临河区大民医院放射科室建设',
+        'active' => false
+    ],
+    [
+        'date' => '2025.10.28',
+        'cat' => '公司新闻',
+        'title' => '巨融医疗科技新品闪耀邵阳市医学会放射学专业委员会',
+        'active' => false
+    ],
+    [
+        'date' => '2025.10.28',
+        'cat' => '公司新闻',
+        'title' => '共庆妇女节，致敬“她力量”',
+        'active' => false
+    ]
+];
+?>
+
+<div class="No000Wrap">
+    <section id="No000Top" class="cw1400">
+        <div class="title">新闻资讯</div>
+        <div class="desc">聚焦行业动态与企业资讯，持续传递前沿医疗显示信息</div>
+    </section>
+    <section id="No000Con" class="cw1400">
+        <div class="grid">
+            <?php foreach ($newsCards as $card): ?>
+            <div class="card <?php echo $card['active'] ? 'active' : ''; ?>">
+                <div class="pic">
+                    <img class="img" src="<?php echo $card['img']; ?>" alt="<?php echo $card['title']; ?>">
+                </div>
+                <div class="info">
+                    <div class="meta">
+                        <span class="date"><?php echo $card['date']; ?></span>
+                        <span class="cat"><?php echo $card['cat']; ?></span>
+                    </div>
+                    <div class="name"><?php echo $card['title']; ?></div>
+                    <div class="sub"><?php echo $card['desc']; ?></div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+
+            <div class="list">
+                <?php foreach ($newsList as $item): ?>
+                <div class="item <?php echo $item['active'] ? 'active' : ''; ?>">
+                    <div class="meta">
+                        <span class="date"><?php echo $item['date']; ?></span>
+                        <span class="cat"><?php echo $item['cat']; ?></span>
+                    </div>
+                    <div class="name"><?php echo $item['title']; ?></div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="more">
+            <a href="javascript:;" class="btn">了解详细 ></a>
+        </div>
+    </section>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var cards = document.querySelectorAll('#No000Con .card');
+    var items = document.querySelectorAll('#No000Con .item');
+    
+    // 卡片交互
+    cards.forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            cards.forEach(function(c) { c.classList.remove('active'); });
+            this.classList.add('active');
+        });
+    });
+    
+    // 列表交互
+    items.forEach(function(item) {
+        item.addEventListener('mouseenter', function() {
+            items.forEach(function(i) { i.classList.remove('active'); });
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+
+<style>
+@import url('https://hk-saas-cdn.lianyayun.com/static/jext/css/global.css?t=v2.1.20');
+
+/* 模块布局 */
+.No000Wrap { padding: 80px 0; background-color: #ffffff; }
+
+/* 模块标题样式 */
+#No000Top { text-align: center; padding-bottom: 50px; }
+#No000Top .title { font-size: 36px; color: #222222; font-weight: bold; margin-bottom: 16px; }
+#No000Top .desc { font-size: 16px; color: #666666; }
+
+/* 模块内容样式 */
+#No000Con .grid { display: flex; gap: 24px; align-items: stretch; justify-content: space-between; }
+#No000Con .card { flex: 1; width: 33.33%; background-color: #f8f8f8; border-radius: 8px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; cursor: pointer; border: 1px solid transparent; }
+#No000Con .card.active { background-color: #ffffff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); transform: translateY(-5px); border-color: #eeeeee; }
+#No000Con .pic { width: 100%; aspect-ratio: 1.5; overflow: hidden; }
+#No000Con .img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+#No000Con .info { padding: 30px; display: flex; flex-direction: column; flex: 1; }
+#No000Con .meta { font-size: 14px; color: #999999; margin-bottom: 15px; display: flex; gap: 15px; }
+#No000Con .name { font-size: 20px; color: #333333; font-weight: bold; margin-bottom: 20px; line-height: 1.4; transition: color 0.3s ease; }
+#No000Con .card.active .name { color: #1E64AE; }
+#No000Con .sub { font-size: 14px; color: #666666; line-height: 1.6; }
+
+#No000Con .list { flex: 1; width: 33.33%; background-color: #f8f8f8; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+#No000Con .item { padding: 20px; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; position: relative; border: 1px solid transparent; }
+#No000Con .item.active { background-color: #ffffff; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); border-color: #eeeeee; }
+#No000Con .item.active::after { content: ''; position: absolute; right: 0; top: 20px; bottom: 20px; width: 3px; background-color: #1E64AE; }
+#No000Con .more { text-align: center; padding-top: 50px; }
+#No000Con .btn { display: inline-block; padding: 12px 35px; border: 1px solid #1E64AE; border-radius: 30px; color: #333333; font-size: 16px; text-decoration: none; transition: all 0.3s ease; }
+
+@media (any-hover: hover) {
+    #No000Con .card:hover { background-color: #ffffff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); transform: translateY(-5px); border-color: #eeeeee; }
+    #No000Con .card:hover .name { color: #1E64AE; }
+    #No000Con .card:hover .img { transform: scale(1.05); }
+    #No000Con .item:hover { background-color: #ffffff; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); border-color: #eeeeee; }
+    #No000Con .btn:hover { background-color: #1E64AE; color: #ffffff; }
+}
+
+@media (max-width: 992px) {
+    .No000Wrap { padding: 0.8rem 0; }
+    #No000Top { padding-bottom: 0.5rem; }
+    #No000Top .title { font-size: 0.4rem; margin-bottom: 0.2rem; }
+    #No000Top .desc { font-size: 0.28rem; }
+    #No000Con .grid { flex-direction: column; gap: 0.3rem; }
+    #No000Con .card { width: 100%; border-radius: 0.16rem; }
+    #No000Con .info { padding: 0.4rem; }
+    #No000Con .meta { font-size: 0.26rem; margin-bottom: 0.2rem; gap: 0.2rem; }
+    #No000Con .name { font-size: 0.34rem; margin-bottom: 0.2rem; }
+    #No000Con .sub { font-size: 0.28rem; }
+    #No000Con .list { width: 100%; padding: 0.3rem; gap: 0.2rem; border-radius: 0.16rem; }
+    #No000Con .item { padding: 0.3rem; border-radius: 0.08rem; }
+    #No000Con .item.active::after { top: 0.3rem; bottom: 0.3rem; width: 0.06rem; }
+    #No000Con .more { padding-top: 0.6rem; }
+    #No000Con .btn { padding: 0.2rem 0.6rem; border-radius: 0.6rem; font-size: 0.28rem; border-width: 0.02rem; }
+}
+
+@media (max-width: 768px) {
+    .No000Wrap { padding: 0.6rem 0; }
+    #No000Top { padding-bottom: 0.4rem; padding-left: 0.3rem; padding-right: 0.3rem; }
+    #No000Top .title { font-size: 0.36rem; }
+    #No000Top .desc { font-size: 0.26rem; }
+    #No000Con .grid { gap: 0.24rem; padding-left: 0.3rem; padding-right: 0.3rem; }
+    #No000Con .info { padding: 0.3rem; }
+    #No000Con .name { font-size: 0.32rem; }
+    #No000Con .sub { font-size: 0.26rem; }
+    #No000Con .meta { font-size: 0.26rem; }
+    #No000Con .list { padding: 0.2rem; }
+    #No000Con .item { padding: 0.2rem; }
+}
+</style>
+```
+
+## 总结
+以上就是对【Gemini】初使用的反馈，Gemini生成的代码使用体验是比其他ai生成的更好的，而且对一些功能性的代码也比较完善好用，缺点就是需要检查的细节较多，但好在Figma可以直接查看样式信息，也是可以较快完成代码的

@@ -1,0 +1,63 @@
+{
+  "newsList": [
+    {
+      "Picture": {
+        "path": "图片链接",
+        "alt":"alt",
+        "title":"title"
+      },
+      "AddTime": "时间",
+      "Category": "分类",
+      "Name": "标题",
+      "Brief": "简介"
+    }
+  ],
+  "newsCategory": [
+    {
+      "Href": "链接",
+      "Name": "标题"
+    }
+  ],
+  "productsList": [
+    {
+      "Picture": {
+        "path": "图片链接"
+      },
+      "AddTime": "时间",
+      "Category": "分类",
+      "Name": "标题",
+      "Brief": "简介"
+    }
+  ],
+   "productsCategory": [
+    {
+      "Href": "链接",
+      "Name": "标题"
+    }
+  ],
+   "detail": {
+      "Name": "标题",
+      "SubName": "副标题",
+      "Brief": "简介",
+      "Picture": [
+        {
+            "name": "标题",
+            "brief":"简介",
+            "unit":{
+                "number":"数据",
+                "unit":"单位"
+            },
+            "img":{
+                "path":"图片链接",
+                "alt":"alt",
+                "title":"title"
+            }
+        }
+      ],
+      "Picture": {
+        "path": "图片链接",
+        "alt":"alt",
+        "title":"title"
+      }
+    }
+}
