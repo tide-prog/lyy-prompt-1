@@ -39,7 +39,7 @@
       "Name": "标题",
       "SubName": "副标题",
       "Brief": "简介",
-      "Picture": [
+      "Data": [
         {
             "name": "标题",
             "brief":"简介",
